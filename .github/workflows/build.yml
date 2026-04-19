@@ -1,11 +1,9 @@
-name: Build macOS App
+name: Build macOS
 
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 jobs:
-  build-mac:
+  build:
     runs-on: macos-latest
 
     steps:
@@ -15,12 +13,9 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install deps
-        run: |
-          npm install --legacy-peer-deps
+      - run: npm install
 
-      - name: Build macOS
-        run: npx electron-builder --mac
+      - run: npm run build
 
       - uses: actions/upload-artifact@v4
         with:
